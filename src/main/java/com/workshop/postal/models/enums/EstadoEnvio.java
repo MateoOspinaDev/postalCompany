@@ -1,18 +1,28 @@
 package com.workshop.postal.models.enums;
 
 public enum EstadoEnvio {
-    RECIBIDO(0),
-    EN_RUTA(1),
-    ENTREGADO(2);
+    RECIBIDO("Recibido"),
+    EN_RUTA("En Ruta"),
+    ENTREGADO("Entregado");
 
-    private final int value;
+    private final String estado;
 
-    EstadoEnvio(int value) {
-        this.value = value;
+    EstadoEnvio(String estado) {
+        this.estado = estado;
     }
 
-    public int getValue() {
-        return value;
+    public String getEstado() {
+        return estado;
+    }
+
+    // Método estático para obtener el enum a partir de una cadena
+    public static EstadoEnvio fromString(String text) {
+        for (EstadoEnvio estado : EstadoEnvio.values()) {
+            if (estado.estado.equalsIgnoreCase(text)) {
+                return estado;
+            }
+        }
+        throw new IllegalArgumentException("Estado de envío no válido: " + text);
     }
 }
 
