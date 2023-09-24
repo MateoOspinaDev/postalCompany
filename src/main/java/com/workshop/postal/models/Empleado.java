@@ -9,7 +9,7 @@ import lombok.Setter;
 @Entity
 @PrimaryKeyJoinColumn(name="id")
 public class Empleado extends Usuario{
-    public String antiguedad;
+    public Integer antiguedadEmpresa;
     public String rh;
     @Enumerated(EnumType.ORDINAL)
     private TipoEmpleado tipoEmpleado;
