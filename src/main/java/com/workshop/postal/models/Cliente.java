@@ -16,9 +16,7 @@ import java.util.List;
 @Entity
 @PrimaryKeyJoinColumn(name="id")
 public class Cliente extends Usuario{
-
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Envio> envios = new ArrayList<>();
-
 }

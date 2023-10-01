@@ -1,6 +1,7 @@
 package com.workshop.postal.controller;
 
 import com.workshop.postal.Dtos.*;
+import com.workshop.postal.helpers.EnvioMapperHelper;
 import com.workshop.postal.models.Envio;
 import com.workshop.postal.models.enums.EstadoEnvio;
 import com.workshop.postal.service.Interfaces.IEnvioService;
@@ -22,19 +23,22 @@ public class EnvioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Envio>> getAllEnvios() {
-        return ResponseEntity.ok(envioService.getAllEnvios());
+    public ResponseEntity<List<GetEnvioDto>> getAllEnvios() {
+        List<Envio> envios = envioService.getAllEnvios();
+        return ResponseEntity.ok(envios.stream().map(EnvioMapperHelper::convertToDto).toList());
     }
 
     @GetMapping("/{numeroGuia}")
-    public ResponseEntity<Envio> getEnvioByNumeroGuia(@PathVariable String numeroGuia) {
-        return ResponseEntity.ok(envioService.obtenerEnvioPorNumeroGuia(numeroGuia));
+    public ResponseEntity<GetEnvioDto> getEnvioByNumeroGuia(@PathVariable String numeroGuia) {
+        return ResponseEntity.ok(EnvioMapperHelper.convertToDto(envioService.obtenerEnvioPorNumeroGuia(numeroGuia)));
     }
 
     @GetMapping("/filtrarPorEstado")
-    public ResponseEntity<List<Envio>> filtrarEnviosPorEstado(@RequestParam EstadoEnvio estadoEnvio, @RequestParam String cedulaEmpleado) {
-        return ResponseEntity.ok(envioService
-                .filtrarEnviosPorEstado(GetEnvioPorEstadoDto.builder().estadoEnvio(estadoEnvio).cedulaEmpleado(cedulaEmpleado).build()));
+    public ResponseEntity<List<GetEnvioDto>> filtrarEnviosPorEstado(@RequestParam EstadoEnvio estadoEnvio, @RequestParam String cedulaEmpleado) {
+        List<Envio> envios = envioService
+                .filtrarEnviosPorEstado(GetEnvioPorEstadoDto.builder().estadoEnvio(estadoEnvio).cedulaEmpleado(cedulaEmpleado).build());
+
+        return ResponseEntity.ok(envios.stream().map(EnvioMapperHelper::convertToDto).toList());
     }
 
 

@@ -1,5 +1,6 @@
 package com.workshop.postal.service;
 
+import com.workshop.postal.exceptions.BusinessException;
 import com.workshop.postal.helpers.EnsureHelper;
 import com.workshop.postal.models.Empleado;
 import com.workshop.postal.repository.EmpleadoRepository;
@@ -24,9 +25,14 @@ public class EmpleadoService implements IEmpleadoService {
         return empleadoRepository.findAll();
     }
 
-    public Optional<Empleado> findById(Long id) {
+    public Empleado findById(Long id) {
         EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
-        return empleadoRepository.findById(id);
+
+        if (empleadoRepository.findById(id).isEmpty()) {
+            throw new BusinessException("El empleado no existe");
+        }
+
+        return empleadoRepository.findById(id).orElseThrow();
     }
 
     public Empleado save(Empleado empleado) {
@@ -34,8 +40,24 @@ public class EmpleadoService implements IEmpleadoService {
         return empleadoRepository.save(empleado);
     }
 
+    public Empleado update(Long id, Empleado empleado) {
+        EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
+        EnsureHelper.ensureNotNull(empleado, "El empleado no puede ser nulo");
+
+        if (empleadoRepository.findById(id).isEmpty()) {
+            throw new BusinessException("El empleado no existe");
+        }
+
+        return empleadoRepository.save(empleado);
+    }
+
     public void deleteById(Long id) {
         EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
+
+        if (empleadoRepository.findById(id).isEmpty()) {
+            throw new BusinessException("El empleado no existe");
+        }
+
         empleadoRepository.deleteById(id);
     }
 }

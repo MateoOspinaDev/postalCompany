@@ -43,7 +43,6 @@ public class PaqueteService implements IPaqueteService {
         EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
         EnsureHelper.ensureNotNull(paqueteActualizado, "El paquete no puede ser nulo");
 
-        paqueteActualizado.setId(id);
         return paqueteRepository.save(paqueteActualizado);
     }
 

@@ -1,6 +1,7 @@
 package com.workshop.postal.models;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +11,10 @@ import lombok.Setter;
 @Setter
 public abstract class Usuario {
     @Id
+    @Setter(AccessLevel.PRIVATE)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Setter(AccessLevel.PRIVATE)
     public String cedula;
     public String nombre;
     public String apellidos;

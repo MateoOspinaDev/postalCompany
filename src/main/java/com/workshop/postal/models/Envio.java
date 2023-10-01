@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name = "envios")
 public class Envio {
-
     @Id
     @Column(name = "numero_guia", nullable = false, unique = true)
     @Setter(AccessLevel.PRIVATE)
@@ -32,11 +31,14 @@ public class Envio {
     private EstadoEnvio estadoEnvio;
     private double valorEnvio;
 
-
     @OneToOne
     @JoinColumn(name = "paquete_id")
     private Paquete paquete;
-
+//    private String cedulaCliente;
+//    private double valorDeclaradoPaquete;
+//    private double peso;
+//    private double valorEnvio;
+//    private String estadoEnvio;
     public Envio(String numeroGuia, Cliente cliente, String ciudadOrigen, String ciudadDestino, String direccionDestino, String nombrePersonaReceptor, String numeroCelularReceptor, LocalDateTime horaEntrega, EstadoEnvio estadoEnvio, double valorEnvio, Paquete paquete) {
         this.numeroGuia = numeroGuia;
         this.cliente = cliente;
