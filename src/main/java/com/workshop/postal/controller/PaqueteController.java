@@ -1,9 +1,6 @@
 package com.workshop.postal.controller;
-
-
 import com.workshop.postal.models.Paquete;
 import com.workshop.postal.service.Interfaces.IPaqueteService;
-import com.workshop.postal.service.PaqueteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

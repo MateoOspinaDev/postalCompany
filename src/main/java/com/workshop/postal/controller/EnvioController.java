@@ -33,7 +33,8 @@ public class EnvioController {
 
     @GetMapping("/filtrarPorEstado")
     public ResponseEntity<List<Envio>> filtrarEnviosPorEstado(@RequestParam EstadoEnvio estadoEnvio, @RequestParam String cedulaEmpleado) {
-        return ResponseEntity.ok(envioService.filtrarEnviosPorEstado(GetEnvioPorEstadoDto.builder().estadoEnvio(estadoEnvio).cedulaEmpleado(cedulaEmpleado).build()));
+        return ResponseEntity.ok(envioService
+                .filtrarEnviosPorEstado(GetEnvioPorEstadoDto.builder().estadoEnvio(estadoEnvio).cedulaEmpleado(cedulaEmpleado).build()));
     }
 
 

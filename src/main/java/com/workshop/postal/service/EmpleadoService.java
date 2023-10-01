@@ -1,5 +1,6 @@
 package com.workshop.postal.service;
 
+import com.workshop.postal.helpers.EnsureHelper;
 import com.workshop.postal.models.Empleado;
 import com.workshop.postal.repository.EmpleadoRepository;
 import com.workshop.postal.service.Interfaces.IEmpleadoService;
@@ -24,14 +25,17 @@ public class EmpleadoService implements IEmpleadoService {
     }
 
     public Optional<Empleado> findById(Long id) {
+        EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
         return empleadoRepository.findById(id);
     }
 
     public Empleado save(Empleado empleado) {
+        EnsureHelper.ensureNotNull(empleado, "El empleado no puede ser nulo");
         return empleadoRepository.save(empleado);
     }
 
     public void deleteById(Long id) {
+        EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
         empleadoRepository.deleteById(id);
     }
 }

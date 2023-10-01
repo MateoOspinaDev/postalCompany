@@ -1,6 +1,7 @@
 package com.workshop.postal.service;
 
 
+import com.workshop.postal.helpers.EnsureHelper;
 import com.workshop.postal.models.Cliente;
 import com.workshop.postal.repository.ClienteRepository;
 import com.workshop.postal.service.Interfaces.IClienteService;
@@ -25,14 +26,17 @@ public class ClienteService implements IClienteService {
     }
 
     public Optional<Cliente> findById(Long id) {
+        EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
         return clienteRepository.findById(id);
     }
 
     public Cliente save(Cliente cliente) {
+        EnsureHelper.ensureNotNull(cliente, "El cliente no puede ser nulo");
         return clienteRepository.save(cliente);
     }
 
     public void deleteById(Long id) {
+        EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
         clienteRepository.deleteById(id);
     }
 }

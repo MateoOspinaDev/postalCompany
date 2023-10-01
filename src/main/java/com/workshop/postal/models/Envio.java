@@ -1,8 +1,5 @@
 package com.workshop.postal.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.workshop.postal.models.enums.EstadoEnvio;
 import jakarta.persistence.*;
 import lombok.*;

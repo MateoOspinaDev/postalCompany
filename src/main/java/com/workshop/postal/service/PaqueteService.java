@@ -1,5 +1,6 @@
 package com.workshop.postal.service;
 
+import com.workshop.postal.helpers.EnsureHelper;
 import com.workshop.postal.models.Paquete;
 import com.workshop.postal.repository.PaqueteRepository;
 import com.workshop.postal.service.Interfaces.IPaqueteService;
@@ -27,22 +28,28 @@ public class PaqueteService implements IPaqueteService {
 
     @Override
     public Optional<Paquete> getPaqueteById(Long id) {
+        EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
         return paqueteRepository.findById(id);
     }
 
     @Override
     public Paquete createPaquete(Paquete paquete) {
+        EnsureHelper.ensureNotNull(paquete, "El paquete no puede ser nulo");
         return paqueteRepository.save(paquete);
     }
 
     @Override
     public Paquete updatePaquete(Long id, Paquete paqueteActualizado) {
+        EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
+        EnsureHelper.ensureNotNull(paqueteActualizado, "El paquete no puede ser nulo");
+
         paqueteActualizado.setId(id);
         return paqueteRepository.save(paqueteActualizado);
     }
 
     @Override
     public void deletePaquete(Long id) {
+        EnsureHelper.ensureNotNull(id, "El id no puede ser nulo");
         paqueteRepository.deleteById(id);
     }
 }
