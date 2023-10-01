@@ -2,10 +2,7 @@ package com.workshop.postal.models;
 
 import com.workshop.postal.models.enums.TipoPaquete;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -14,6 +11,7 @@ import lombok.Setter;
 public class Paquete {
 
     @Id
+    @Setter(AccessLevel.PRIVATE)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

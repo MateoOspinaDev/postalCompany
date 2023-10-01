@@ -2,6 +2,7 @@ package com.workshop.postal.service;
 
 import com.workshop.postal.Dtos.*;
 import com.workshop.postal.exceptions.BusinessException;
+import com.workshop.postal.helpers.EnsureHelper;
 import com.workshop.postal.models.Cliente;
 import com.workshop.postal.models.Empleado;
 import com.workshop.postal.models.Envio;
@@ -46,12 +47,18 @@ public class EnvioService implements IEnvioService {
         @Transactional
         public EnvioRecibidoDto crearEnvio(EnvioDto request) throws BusinessException {
 
+            EnsureHelper.ensureNotNullOrEmpty(request.getCedulaCliente(), "La cédula del cliente no puede ser nula o vacía.");
+            EnsureHelper.ensureNotNullOrEmpty(request.getCiudadOrigen(), "La ciudad de origen no puede ser nula o vacía.");
+            EnsureHelper.ensureNotNullOrEmpty(request.getCiudadDestino(), "La ciudad de destino no puede ser nula o vacía.");
+            EnsureHelper.ensureNotNullOrEmpty(request.getDireccionDestino(), "La dirección de destino no puede ser nula o vacía.");
+            EnsureHelper.ensureNotNullOrEmpty(request.getNombreRecibe(), "El nombre de quien recibe no puede ser nulo o vacío.");
+            EnsureHelper.ensureNotNullOrEmpty(request.getCelular(), "El celular de quien recibe no puede ser nulo o vacío.");
+            EnsureHelper.ensureNotZeroOrNegative(request.getValorDeclaradoPaquete(), "El valor declarado del paquete no puede ser cero o negativo.");
+            EnsureHelper.ensureNotZeroOrNegative(request.getPeso(), "El peso del paquete no puede ser cero o negativo.");
+
             Cliente remitente = clienteRepository.findByCedula(request.getCedulaCliente());
 
-            if (remitente == null) {
-                throw new BusinessException("El cliente con cedula "+ request.getCedulaCliente() +" debe de estar registrado para\n" +
-                        "poder enviar un paquete.");
-            }
+            EnsureHelper.ensureNotNull(remitente, "El cliente con cedula "+ request.getCedulaCliente() +" debe de estar registrado para\n" + "poder enviar un paquete.");
 
             TipoPaquete tipoPaquete = calcularTipoPaquete(request.getPeso());
 
@@ -83,17 +90,17 @@ public class EnvioService implements IEnvioService {
     @Transactional
     public UpdatedEstadoEnvioDto actualizarEstadoEnvio(UpdateEstadoEnvioDto updateEstadoEnvioDto) throws BusinessException {
 
+        EnsureHelper.ensureNotNullOrEmpty(updateEstadoEnvioDto.getCedulaEmpleado(), "La cédula del empleado no puede ser nula o vacía.");
+        EnsureHelper.ensureNotNullOrEmpty(updateEstadoEnvioDto.getNumeroGuia(), "El número de guía no puede ser nulo o vacío.");
+        EnsureHelper.ensureNotNullOrEmpty(String.valueOf(updateEstadoEnvioDto.getEstadoEnvio()), "El estado del envío no puede ser nulo o vacío.");
+
         Empleado empleado = empleadoRepository.findByCedula(updateEstadoEnvioDto.getCedulaEmpleado());
 
-        if (empleado == null) {
-            throw new BusinessException("El empleado con cédula " + updateEstadoEnvioDto.getCedulaEmpleado() + " no existe en nuestra compañía.");
-        }
+        EnsureHelper.ensureNotNull(empleado, "El empleado con cédula " + updateEstadoEnvioDto.getCedulaEmpleado() + " no existe en nuestra compañía.");
 
         Envio envio = envioRepository.findByNumeroGuia(updateEstadoEnvioDto.getNumeroGuia());
 
-        if (envio == null) {
-            throw new BusinessException("No se encontró un envío con el número de guía " + updateEstadoEnvioDto.getNumeroGuia() + ".");
-        }
+        EnsureHelper.ensureNotNull(envio, "No se encontró un envío con el número de guía " + updateEstadoEnvioDto.getNumeroGuia() + ".");
 
         if (!empleadoPuedeActualizarEstado(empleado)) {
             throw new BusinessException("El empleado no tiene permisos para actualizar el estado del paquete.");
@@ -114,12 +121,14 @@ public class EnvioService implements IEnvioService {
 
     @Transactional(readOnly = true)
     public List<Envio> filtrarEnviosPorEstado(GetEnvioPorEstadoDto getEnvioPorEstadoDto) throws BusinessException {
+        EnsureHelper.ensureNotNullOrEmpty(getEnvioPorEstadoDto.getCedulaEmpleado(),
+                "La cédula del empleado no puede ser nula o vacía.");
+        EnsureHelper.ensureNotNullOrEmpty(String.valueOf(getEnvioPorEstadoDto.getEstadoEnvio()),
+                "El estado del envío no puede ser nulo o vacío.");
 
         Empleado empleado = empleadoRepository.findByCedula(getEnvioPorEstadoDto.getCedulaEmpleado());
 
-        if (empleado == null) {
-            throw new BusinessException("El empleado con cédula " + getEnvioPorEstadoDto.getCedulaEmpleado() + " no existe en nuestra compañía.");
-        }
+        EnsureHelper.ensureNotNull(empleado, "El empleado con cédula " + getEnvioPorEstadoDto.getCedulaEmpleado() + " no existe en nuestra compañía.");
 
         if (!empleado.getTipoEmpleado().equals(TipoEmpleado.REPARTIDOR) &&
                 !empleado.getTipoEmpleado().equals(TipoEmpleado.COORDINADOR)) {
@@ -132,9 +141,8 @@ public class EnvioService implements IEnvioService {
     @Transactional(readOnly = true)
     public Envio obtenerEnvioPorNumeroGuia(String numeroGuia) {
 
-        if(numeroGuia == null || numeroGuia.isEmpty()){
-            throw new BusinessException("El número de guía no puede ser nulo o vacío.");
-        }
+        EnsureHelper.ensureNotNullOrEmpty(numeroGuia,
+                "El número de guía no puede ser nulo o vacío.");
 
         return envioRepository.findByNumeroGuia(numeroGuia);
     }
