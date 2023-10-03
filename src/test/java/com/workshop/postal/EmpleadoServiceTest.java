@@ -3,7 +3,7 @@ package com.workshop.postal;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import com.workshop.postal.models.Cliente;
+
 import com.workshop.postal.models.Empleado;
 import com.workshop.postal.repository.EmpleadoRepository;
 import com.workshop.postal.service.EmpleadoService;
@@ -31,15 +31,15 @@ public class EmpleadoServiceTest {
 
     @Test
     public void testFindAll() {
-        // Simulamos el comportamiento del repositorio
+
         when(empleadoRepository.findAll()).thenReturn(List.of(new Empleado(), new Empleado()));
 
         List<Empleado> empleados = empleadoService.findAll();
 
-        // Verificamos que se llamó al método findAll del repositorio
+
         verify(empleadoRepository, times(1)).findAll();
 
-        // Aserciones
+
         assertNotNull(empleados);
         assertEquals(2, empleados.size());
         for (Empleado empleado : empleados) {
@@ -70,10 +70,10 @@ public class EmpleadoServiceTest {
 
         Empleado savedEmpleado = empleadoService.save(empleado);
 
-        // Verificamos que se llamó al método save del repositorio
+
         verify(empleadoRepository, times(1)).save(empleado);
 
-        // Aserciones
+
         assertNotNull(savedEmpleado);
         assertEquals(empleado, savedEmpleado);
     }
@@ -87,13 +87,13 @@ public class EmpleadoServiceTest {
 
         Empleado updatedEmpleado = empleadoService.update(id, empleadoActualizado);
 
-        // Verificamos que se llamó al método findById del repositorio
+
         verify(empleadoRepository, times(1)).findById(id);
 
-        // Verificamos que se llamó al método save del repositorio
+
         verify(empleadoRepository, times(1)).save(empleadoActualizado);
 
-        // Aserciones
+
         assertNotNull(updatedEmpleado);
         assertEquals(empleadoActualizado, updatedEmpleado);
     }
@@ -105,10 +105,10 @@ public class EmpleadoServiceTest {
 
         empleadoService.deleteById(id);
 
-        // Verificamos que se llamó al método findById del repositorio
+
         verify(empleadoRepository, times(1)).findById(id);
 
-        // Verificamos que se llamó al método deleteById del repositorio
+
         verify(empleadoRepository, times(1)).deleteById(id);
     }
 }

@@ -147,7 +147,7 @@ public class EnvioService implements IEnvioService {
         return envioRepository.findByNumeroGuia(numeroGuia);
     }
 
-    private boolean puedeCambiarseEstado(EstadoEnvio estadoEnvio, EstadoEnvio estadoEnvioNuevo) {
+    public boolean puedeCambiarseEstado(EstadoEnvio estadoEnvio, EstadoEnvio estadoEnvioNuevo) {
         return switch (estadoEnvio) {
             case RECIBIDO -> estadoEnvioNuevo.equals(EstadoEnvio.EN_RUTA);
             case EN_RUTA -> estadoEnvioNuevo.equals(EstadoEnvio.ENTREGADO);
@@ -155,7 +155,7 @@ public class EnvioService implements IEnvioService {
         };
     }
 
-    private boolean empleadoPuedeActualizarEstado(Empleado empleado) {
+    public boolean empleadoPuedeActualizarEstado(Empleado empleado) {
         return empleado.getTipoEmpleado().equals(TipoEmpleado.REPARTIDOR) ||
                 empleado.getTipoEmpleado().equals(TipoEmpleado.COORDINADOR);
     }
@@ -176,7 +176,7 @@ public class EnvioService implements IEnvioService {
         return sb.toString() + numero;
     }
 
-    private TipoPaquete calcularTipoPaquete(double peso) {
+    public TipoPaquete calcularTipoPaquete(double peso) {
             if (peso < 2) {
                 return TipoPaquete.LIVIANO;
             } else if (peso < 5) {
@@ -186,7 +186,7 @@ public class EnvioService implements IEnvioService {
             }
         }
 
-        private double calcularValorEnvio(TipoPaquete tipoPaquete) {
+        public double calcularValorEnvio(TipoPaquete tipoPaquete) {
             return switch (tipoPaquete) {
                 case LIVIANO -> 30000;
                 case MEDIANO -> 40000;

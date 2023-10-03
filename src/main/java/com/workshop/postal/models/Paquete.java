@@ -29,5 +29,7 @@ public class Paquete {
         this.valorDeclarado = valorDeclarado;
         this.tipoPaquete = tipoPaquete;
     }
+
+
 }
 
