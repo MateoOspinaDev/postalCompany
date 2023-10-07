@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+
 @PrimaryKeyJoinColumn(name="id")
 public class Empleado extends Usuario{
     public Integer antiguedadEmpresa;

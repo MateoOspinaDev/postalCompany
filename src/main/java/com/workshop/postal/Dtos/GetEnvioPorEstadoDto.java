@@ -4,6 +4,7 @@ import com.workshop.postal.models.enums.EstadoEnvio;
 import lombok.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
