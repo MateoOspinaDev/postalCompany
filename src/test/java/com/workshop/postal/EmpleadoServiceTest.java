@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
+import com.workshop.postal.exceptions.BusinessException;
 import com.workshop.postal.models.Empleado;
 import com.workshop.postal.repository.EmpleadoRepository;
 import com.workshop.postal.service.EmpleadoService;
@@ -15,6 +16,8 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.*;
+
 
 public class EmpleadoServiceTest {
 
@@ -30,16 +33,13 @@ public class EmpleadoServiceTest {
     }
 
     @Test
-    public void testFindAll() {
-
-        when(empleadoRepository.findAll()).thenReturn(List.of(new Empleado(), new Empleado()));
+    public void testFindAll_WhenEmpleadosExist_ReturnsListOfEmpleados() {
+        List<Empleado> empleadosMock = Arrays.asList(new Empleado(), new Empleado());
+        when(empleadoRepository.findAll()).thenReturn(empleadosMock);
 
         List<Empleado> empleados = empleadoService.findAll();
 
-
         verify(empleadoRepository, times(1)).findAll();
-
-
         assertNotNull(empleados);
         assertEquals(2, empleados.size());
         for (Empleado empleado : empleados) {
@@ -48,67 +48,123 @@ public class EmpleadoServiceTest {
     }
 
     @Test
-    public void testFindById() {
+    public void testFindAll_WhenNoEmpleadosExist_ReturnsEmptyList() {
+        when(empleadoRepository.findAll()).thenReturn(Collections.emptyList());
+
+        List<Empleado> empleados = empleadoService.findAll();
+
+        verify(empleadoRepository, times(1)).findAll();
+        assertNotNull(empleados);
+        assertEquals(0, empleados.size());
+    }
+
+    @Test
+    public void testFindById_WithValidId_ReturnsEmpleado() {
         Long id = 1L;
-        Empleado empleado = new Empleado();
-        when(empleadoRepository.findById(id)).thenReturn(Optional.of(empleado));
+        Empleado empleadoMock = new Empleado();
+        when(empleadoRepository.findById(id)).thenReturn(Optional.of(empleadoMock));
 
         Empleado result = empleadoService.findById(id);
 
-
         verify(empleadoRepository, times(1)).findById(id);
-
-
         assertNotNull(result);
-        assertEquals(empleado, result);
+        assertEquals(empleadoMock, result);
     }
 
     @Test
-    public void testSave() {
-        Empleado empleado = new Empleado();
-        when(empleadoRepository.save(empleado)).thenReturn(empleado);
-
-        Empleado savedEmpleado = empleadoService.save(empleado);
-
-
-        verify(empleadoRepository, times(1)).save(empleado);
-
-
-        assertNotNull(savedEmpleado);
-        assertEquals(empleado, savedEmpleado);
-    }
-
-    @Test
-    public void testUpdate() {
+    public void testFindById_WithInvalidId_ThrowsBusinessException() {
         Long id = 1L;
-        Empleado empleadoActualizado = new Empleado();
-        when(empleadoRepository.findById(id)).thenReturn(Optional.of(empleadoActualizado));
-        when(empleadoRepository.save(empleadoActualizado)).thenReturn(empleadoActualizado);
+        when(empleadoRepository.findById(id)).thenReturn(Optional.empty());
 
-        Empleado updatedEmpleado = empleadoService.update(id, empleadoActualizado);
+        BusinessException exception = assertThrows(BusinessException.class, () -> empleadoService.findById(id));
+        assertEquals("El empleado no existe", exception.getMessage());
+        verify(empleadoRepository, times(1)).findById(id);
+    }
 
+    @Test
+    public void testSave_WithValidEmpleado_ReturnsSavedEmpleado() {
+        Empleado empleadoMock = new Empleado();
+        when(empleadoRepository.save(empleadoMock)).thenReturn(empleadoMock);
+
+        Empleado savedEmpleado = empleadoService.save(empleadoMock);
+
+        verify(empleadoRepository, times(1)).save(empleadoMock);
+        assertNotNull(savedEmpleado);
+        assertEquals(empleadoMock, savedEmpleado);
+    }
+
+    @Test
+    public void testSave_WithNullEmpleado_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> empleadoService.save(null));
+        verify(empleadoRepository, never()).save(any(Empleado.class));
+    }
+
+    @Test
+    public void testUpdate_WithValidIdAndEmpleado_ReturnsUpdatedEmpleado() {
+        Long id = 1L;
+        Empleado empleadoMock = new Empleado();
+        when(empleadoRepository.findById(id)).thenReturn(Optional.of(empleadoMock));
+        when(empleadoRepository.save(empleadoMock)).thenReturn(empleadoMock);
+
+        Empleado updatedEmpleado = empleadoService.update(id, empleadoMock);
 
         verify(empleadoRepository, times(1)).findById(id);
-
-
-        verify(empleadoRepository, times(1)).save(empleadoActualizado);
-
-
+        verify(empleadoRepository, times(1)).save(empleadoMock);
         assertNotNull(updatedEmpleado);
-        assertEquals(empleadoActualizado, updatedEmpleado);
+        assertEquals(empleadoMock, updatedEmpleado);
     }
 
     @Test
-    public void testDeleteById() {
+    public void testUpdate_WithInvalidId_ThrowsBusinessException() {
+        Long id = 1L;
+        Empleado empleadoMock = new Empleado();
+        when(empleadoRepository.findById(id)).thenReturn(Optional.empty());
+
+        BusinessException exception = assertThrows(BusinessException.class, () -> empleadoService.update(id, empleadoMock));
+        assertEquals("El empleado no existe", exception.getMessage());
+        verify(empleadoRepository, times(1)).findById(id);
+        verify(empleadoRepository, never()).save(any(Empleado.class));
+    }
+
+    @Test
+    public void testUpdate_WithNullId_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> empleadoService.update(null, new Empleado()));
+        verify(empleadoRepository, never()).save(any(Empleado.class));
+    }
+
+    @Test
+    public void testUpdate_WithNullEmpleado_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> empleadoService.update(1L, null));
+        verify(empleadoRepository, never()).save(any(Empleado.class));
+    }
+
+    @Test
+    public void testDeleteById_WithValidId_DeletesEmpleado() {
         Long id = 1L;
         when(empleadoRepository.findById(id)).thenReturn(Optional.of(new Empleado()));
 
         empleadoService.deleteById(id);
 
-
         verify(empleadoRepository, times(1)).findById(id);
-
-
         verify(empleadoRepository, times(1)).deleteById(id);
     }
+
+    @Test
+    public void testDeleteById_WithInvalidId_ThrowsBusinessException() {
+        Long id = 1L;
+        when(empleadoRepository.findById(id)).thenReturn(Optional.empty());
+
+        BusinessException exception = assertThrows(BusinessException.class, () -> empleadoService.deleteById(id));
+        assertEquals("El empleado no existe", exception.getMessage());
+        verify(empleadoRepository, times(1)).findById(id);
+        verify(empleadoRepository, never()).deleteById(anyLong());
+    }
+
+    @Test
+    public void testDeleteById_WithNullId_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> empleadoService.deleteById(null));
+        verify(empleadoRepository, never()).findById(anyLong());
+        verify(empleadoRepository, never()).deleteById(anyLong());
+    }
 }
+

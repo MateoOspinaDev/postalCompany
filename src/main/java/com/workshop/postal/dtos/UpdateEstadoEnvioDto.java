@@ -6,6 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class UpdateEstadoEnvioDto {
     private String numeroGuia;
     private EstadoEnvio estadoEnvio;
