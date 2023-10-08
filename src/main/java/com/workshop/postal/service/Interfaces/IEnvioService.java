@@ -1,8 +1,7 @@
 package com.workshop.postal.service.Interfaces;
-import com.workshop.postal.Dtos.*;
+import com.workshop.postal.dtos.*;
 import com.workshop.postal.exceptions.BusinessException;
 import com.workshop.postal.models.Envio;
-import com.workshop.postal.models.enums.EstadoEnvio;
 
 import java.util.List;
 public interface IEnvioService {

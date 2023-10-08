@@ -1,6 +1,6 @@
 package com.workshop.postal.controller;
 
-import com.workshop.postal.Dtos.*;
+import com.workshop.postal.dtos.*;
 import com.workshop.postal.helpers.EnvioMapperHelper;
 import com.workshop.postal.models.Envio;
 import com.workshop.postal.models.enums.EstadoEnvio;

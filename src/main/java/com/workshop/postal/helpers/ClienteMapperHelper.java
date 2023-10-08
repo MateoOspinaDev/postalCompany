@@ -1,7 +1,7 @@
 package com.workshop.postal.helpers;
 
-import com.workshop.postal.Dtos.ClienteDto;
-import com.workshop.postal.Dtos.EnvioRecibidoDto;
+import com.workshop.postal.dtos.ClienteDto;
+import com.workshop.postal.dtos.EnvioRecibidoDto;
 import com.workshop.postal.models.Cliente;
 import org.modelmapper.ModelMapper;
 

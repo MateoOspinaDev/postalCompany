@@ -1,6 +1,6 @@
 package com.workshop.postal.helpers;
 
-import com.workshop.postal.Dtos.GetEnvioDto;
+import com.workshop.postal.dtos.GetEnvioDto;
 import com.workshop.postal.models.Envio;
 import org.modelmapper.ModelMapper;
 

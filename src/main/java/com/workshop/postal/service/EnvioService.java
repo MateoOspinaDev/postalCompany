@@ -1,6 +1,6 @@
 package com.workshop.postal.service;
 
-import com.workshop.postal.Dtos.*;
+import com.workshop.postal.dtos.*;
 import com.workshop.postal.exceptions.BusinessException;
 import com.workshop.postal.helpers.EnsureHelper;
 import com.workshop.postal.models.Cliente;
