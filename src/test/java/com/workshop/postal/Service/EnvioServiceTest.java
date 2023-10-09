@@ -160,4 +160,26 @@ public class EnvioServiceTest {
         boolean result = envioService.empleadoPuedeActualizarEstado(empleado);
 
         assertTrue(result);
-    }}
+    }
+    @Test
+    public void testEmpleadoPuedeActualizarEstado_EmpleadoCoordinador() {
+        Empleado empleado = new Empleado();
+        empleado.setTipoEmpleado(TipoEmpleado.COORDINADOR);
+
+        boolean result = envioService.empleadoPuedeActualizarEstado(empleado);
+
+        assertTrue(result);
+    }
+    @Test
+    public void testEmpleadoPuedeActualizarEstado_EmpleadoOtroTipo() {
+        Empleado empleado = new Empleado();
+        empleado.setTipoEmpleado(TipoEmpleado.CONDUCTOR);
+
+        boolean result = envioService.empleadoPuedeActualizarEstado(empleado);
+
+        assertFalse(result);
+    }
+
+
+
+}
