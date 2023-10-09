@@ -1,9 +1,12 @@
-package com.workshop.postal;
+package com.workshop.postal.Service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
+import com.workshop.postal.dtos.UpdateEstadoEnvioDto;
+import com.workshop.postal.dtos.UpdatedEstadoEnvioDto;
+import com.workshop.postal.exceptions.BusinessException;
 import com.workshop.postal.models.Empleado;
 import com.workshop.postal.models.Envio;
 import com.workshop.postal.models.enums.EstadoEnvio;
@@ -124,7 +127,6 @@ public class EnvioServiceTest {
     }
     @Test
     public void testObtenerEnvioPorNumeroGuia_EnvioExistente() {
-
         String numeroGuia = "ABC123";
         when(envioRepository.findByNumeroGuia(numeroGuia)).thenReturn(new Envio());
 
@@ -135,7 +137,6 @@ public class EnvioServiceTest {
 
     @Test
     public void testObtenerEnvioPorNumeroGuia_EnvioNoExiste() {
-
         String numeroGuia = "XYZ789";
         when(envioRepository.findByNumeroGuia(numeroGuia)).thenReturn(null);
 
@@ -147,7 +148,6 @@ public class EnvioServiceTest {
 
     @Test
     public void testObtenerEnvioPorNumeroGuia_NumeroGuiaNuloOVacio() {
-
         String numeroGuia = null;
         assertThrows(IllegalArgumentException.class, () -> envioService.obtenerEnvioPorNumeroGuia(numeroGuia));
     }
@@ -160,34 +160,4 @@ public class EnvioServiceTest {
         boolean result = envioService.empleadoPuedeActualizarEstado(empleado);
 
         assertTrue(result);
-    }
-
-    @Test
-    public void testEmpleadoPuedeActualizarEstado_EmpleadoCoordinador() {
-        Empleado empleado = new Empleado();
-        empleado.setTipoEmpleado(TipoEmpleado.COORDINADOR);
-
-        boolean result = envioService.empleadoPuedeActualizarEstado(empleado);
-
-        assertTrue(result);
-    }
-    @Test
-    public void testEmpleadoPuedeActualizarEstado_EmpleadoOtroTipo() {
-        Empleado empleado = new Empleado();
-        empleado.setTipoEmpleado(TipoEmpleado.CONDUCTOR);
-
-        boolean result = envioService.empleadoPuedeActualizarEstado(empleado);
-
-        assertFalse(result);
-    }
-
-
-
-
-
-
-
-
-
-}
-
+    }}

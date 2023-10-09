@@ -1,24 +1,24 @@
-package com.workshop.postal;
+package com.workshop.postal.Service;
 
 
 
-    import com.workshop.postal.models.Paquete;
-    import com.workshop.postal.models.enums.TipoPaquete;
-    import com.workshop.postal.repository.PaqueteRepository;
-    import com.workshop.postal.service.PaqueteService;
-    import org.junit.jupiter.api.BeforeEach;
-    import org.junit.jupiter.api.Test;
-    import org.mockito.InjectMocks;
-    import org.mockito.Mock;
-    import java.util.List;
-    import java.util.Optional;
-    import static org.junit.jupiter.api.Assertions.assertEquals;
-    import static org.junit.jupiter.api.Assertions.assertNotNull;
-    import static org.mockito.Mockito.*;
-    import static org.junit.jupiter.api.Assertions.*;
-    import java.util.Arrays;
-    import org.junit.jupiter.api.extension.ExtendWith;
-    import org.mockito.junit.jupiter.MockitoExtension;
+import com.workshop.postal.models.Paquete;
+import com.workshop.postal.models.enums.TipoPaquete;
+import com.workshop.postal.repository.PaqueteRepository;
+import com.workshop.postal.service.PaqueteService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import java.util.List;
+import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class PaqueteServiceTest {

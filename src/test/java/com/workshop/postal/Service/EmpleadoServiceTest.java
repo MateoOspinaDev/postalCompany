@@ -1,4 +1,4 @@
-package com.workshop.postal;
+package com.workshop.postal.Service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
