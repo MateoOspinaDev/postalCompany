@@ -33,7 +33,6 @@ public class WebSecurityConfig {
         httpSecurity
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/api/auth/**").permitAll()
-                        //.requestMatchers("/").hasRole(Role.USER.name())
                         .anyRequest().hasRole(Role.USER.name())
 //                        .requestMatchers(HttpMethod.GET).hasAuthority("READ")
 //                        .requestMatchers(HttpMethod.POST).hasAuthority("WRITE")
