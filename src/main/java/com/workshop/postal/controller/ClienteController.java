@@ -1,7 +1,7 @@
 package com.workshop.postal.controller;
 
 
-import com.workshop.postal.Dtos.ClienteDto;
+import com.workshop.postal.dtos.ClienteDto;
 import com.workshop.postal.helpers.ClienteMapperHelper;
 import com.workshop.postal.models.Cliente;
 import com.workshop.postal.service.Interfaces.IClienteService;

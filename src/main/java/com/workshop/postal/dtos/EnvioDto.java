@@ -1,4 +1,4 @@
-package com.workshop.postal.Dtos;
+package com.workshop.postal.dtos;
 
 import lombok.Getter;
 import lombok.Setter;

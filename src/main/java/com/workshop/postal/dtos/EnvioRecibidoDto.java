@@ -1,4 +1,4 @@
-package com.workshop.postal.Dtos;
+package com.workshop.postal.dtos;
 
 import com.workshop.postal.models.enums.EstadoEnvio;
 import lombok.AllArgsConstructor;

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface ClienteRepository  extends JpaRepository<Cliente, Long> {
-
     void deleteById(Long id);
     Optional<Cliente> findById(Long id);
     Cliente findByCedula(String cedulaCliente);

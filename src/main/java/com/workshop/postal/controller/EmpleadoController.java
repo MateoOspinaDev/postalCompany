@@ -1,6 +1,6 @@
 package com.workshop.postal.controller;
 
-import com.workshop.postal.Dtos.EmpleadoDto;
+import com.workshop.postal.dtos.EmpleadoDto;
 import com.workshop.postal.models.Empleado;
 import com.workshop.postal.service.Interfaces.IEmpleadoService;
 import org.modelmapper.ModelMapper;
