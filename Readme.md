@@ -50,7 +50,26 @@ El proyecto es una REST API que tiene como objetivo automatizar los procesos de 
 7. Use la aplicacion desde swagger,(poner link swagger)
 
 # Diagramas
-![Diagrama de clases](URL de la Imagen)
+#### Diagrama de clases
+![Diagrama de clases](https://github.com/MateoOspinaDev/postalCompany/blob/master/diagramas/clasesProyecto.drawio.png?raw=true)
 
+#### Diagrama entidad-relacion.
+![Diagrama_entidad_relacion](https://github.com/MateoOspinaDev/postalCompany/blob/master/diagramas/entidades.drawio.png?raw=true)
+
+## Contacto
+
+Si tienes preguntas, comentarios o sugerencias sobre este proyecto, no dudes en ponerte en contacto Con nosotros los desarrolladores.
+
+**Mateo Ospina**
+- Correo Electrónico: mateoospinadesarrollo@gmail.com
+
+- LinkedIn: [Tu Nombre en LinkedIn](https://www.linkedin.com/in/tunombre/)
+
+**Santiago Martinez**
+- Correo Electrónico: smyardev2@gmail.com
+
+
+## 📃Licencia
+Este proyecto está bajo la Licencia propietaria - mira el archivo [LICENSE.md](license.md) para obtener mas detalles sobre la licencia.
 
 
