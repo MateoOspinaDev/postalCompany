@@ -1,5 +1,5 @@
 # API de Gestión de Mensajería con  (Java & Spring Boot)
-## DESCRIPCION:
+## Descripcion:
 El proyecto es una REST API que tiene como objetivo automatizar los procesos de envios de mercancia, que permita rastrear, actualizar y tener acceso a la diferente informacion que se genera en una empresa de mensajeria, su fin es facilitar el proceso de envios para las empresas mediante el uso de este desarrollo.
 
 #### El sistema permite:
@@ -8,6 +8,8 @@ El proyecto es una REST API que tiene como objetivo automatizar los procesos de 
 - Crear empleados, actualizarlos, eliminarlos(por cedula) y obtenerlos(por cedula).
 - Creacion de paquetes, con toda su informacion , asignacion de peso, calculo del valor del envio, seguimiento del estado del paquete.
 - Creacion de envios con toda su informacion y acceso a los datos de los actores del envio como son paquete, empleado y cliente.
+- Filtracion de Envios por estado.
+
 ## Tecnologías Utilizadas:
 
 
@@ -35,6 +37,20 @@ El proyecto es una REST API que tiene como objetivo automatizar los procesos de 
 - **JPA (Java Persistence API)**: JPA se utiliza para interactuar con la base de datos de manera eficiente.
 
 - **Postman**: Postman se utiliza para poder testear el API REST
+
+# Instalación y Uso
+
+
+1. Clonar el repositorio: `git clone https://github.com/MateoOspinaDev/postalCompany`
+2. Abra el proyecto de gestión de mensajería con su IDE preferido(Recomendado IntelliJ)
+3. Configure el archivo application.properties en la ruta src/main/resources para conectarse a la base de datos Mysql, puede dejar la configuracion por defecto y configurarla a su necesidad(Contraseña, usuario y direccion a su BD)
+4. Ejecute el archivo build.gradle para descargar las dependencias del proyecto, cargar las configuraciones y que empiece a compilarlo.
+5. Ejecute el archivo PostalCompanyApplication para correr el programa.
+6. Acceda a testear y usar la aplicacion desde Postman usando los endpoints que se pueden ver en los controllers
+7. Use la aplicacion desde swagger,(poner link swagger)
+
+# Diagramas
+![Diagrama de clases](URL de la Imagen)
 
 
 
