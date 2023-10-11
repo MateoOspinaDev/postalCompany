@@ -5,6 +5,7 @@ import com.workshop.postal.dtos.ClienteDto;
 import com.workshop.postal.helpers.ClienteMapperHelper;
 import com.workshop.postal.models.Cliente;
 import com.workshop.postal.service.Interfaces.IClienteService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+
 @RequestMapping("/clientes")
 public class ClienteController {
 
@@ -22,7 +24,7 @@ public class ClienteController {
     public ClienteController(IClienteService clienteService) {
         this.clienteService = clienteService;
     }
-
+    @ApiOperation(value ="Obtener todos los clientes",notes = "Esta operacion es para obtener todos los clientes")
     @GetMapping
     public List<ClienteDto> getAllClientes() {
         List<Cliente> clientes = clienteService.findAll();
@@ -31,22 +33,24 @@ public class ClienteController {
                 .map(ClienteMapperHelper::convertToDto)
                 .collect(Collectors.toList());
     }
-
+    @ApiOperation(value = "CLiente por ID",notes = "Se debe pasar el id como parametro, para buscar el cliente con el id indicado")
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDto> getClienteById(@PathVariable Long id) {
         return ResponseEntity.ok(ClienteMapperHelper.convertToDto(clienteService.findById(id)));
     }
 
+    @ApiOperation(value = "Crear cliente")
     @PostMapping
     public ResponseEntity<ClienteDto> createCliente(@RequestBody Cliente cliente) {
         return ResponseEntity.ok(ClienteMapperHelper.convertToDto(clienteService.save(cliente)));
     }
 
+    @ApiOperation(value ="actualizar cliente")
     @PutMapping("/{id}")
     public ResponseEntity<ClienteDto> updateCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
         return ResponseEntity.ok(ClienteMapperHelper.convertToDto(clienteService.save(cliente)));
     }
-
+    @ApiOperation(value = "Borrar Cliente")
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteCliente(@PathVariable Long id) {
         clienteService.deleteById(id);
