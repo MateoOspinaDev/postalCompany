@@ -67,7 +67,7 @@ Si tienes preguntas, comentarios o sugerencias sobre este proyecto, no dudes en 
 
 **Santiago Martinez**
 - Correo Electrónico: smyardev2@gmail.com
-
+- LinkedIn: [Santiago Martinez](http://linkedin.com/in/santiago-martinez-238a6525a)
 
 ## 📃Licencia
 Este proyecto está bajo la Licencia propietaria - mira el archivo [LICENSE.md](license.md) para obtener mas detalles sobre la licencia.

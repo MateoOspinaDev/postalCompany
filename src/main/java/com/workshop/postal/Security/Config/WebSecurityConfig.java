@@ -6,6 +6,7 @@ import com.workshop.postal.Security.User.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -32,12 +33,12 @@ public class WebSecurityConfig {
 
         httpSecurity
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().hasRole(Role.USER.name())
-//                        .requestMatchers(HttpMethod.GET).hasAuthority("READ")
-//                        .requestMatchers(HttpMethod.POST).hasAuthority("WRITE")
-//                        .requestMatchers(HttpMethod.PUT).hasAuthority("WRITE")
-//                        .requestMatchers(HttpMethod.DELETE).hasAuthority("WRITE")
+                       // .requestMatchers("/api/auth/**").permitAll()
+                        //.anyRequest().hasRole(Role.USER.name())
+                                .anyRequest().permitAll()
+     //                  .requestMatchers(HttpMethod.GET).hasAuthority("READ")
+   //                    .requestMatchers(HttpMethod.PUT).hasAuthority("WRITE")
+ //                      .requestMatchers(HttpMethod.DELETE).hasAuthority("WRITE")
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
