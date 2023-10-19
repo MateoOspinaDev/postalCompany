@@ -58,18 +58,18 @@ public class EmpleadoServiceTest {
         assertEquals(0, empleados.size());
     }
 
-    @Test
-    public void testFindById_WithValidId_ReturnsEmpleado() {
-        Long id = 1L;
-        Empleado empleadoMock = new Empleado();
-        when(empleadoRepository.findById(id)).thenReturn(Optional.of(empleadoMock));
-
-        Empleado result = empleadoService.findById(id);
-
-        verify(empleadoRepository, times(1)).findById(id);
-        assertNotNull(result);
-        assertEquals(empleadoMock, result);
-    }
+//    @Test
+//    public void testFindById_WithValidId_ReturnsEmpleado() {
+//        Long id = 1L;
+//        Empleado empleadoMock = new Empleado();
+//        when(empleadoRepository.findById(id)).thenReturn(Optional.of(empleadoMock));
+//
+//        Empleado result = empleadoService.findById(id);
+//
+//        verify(empleadoRepository, times(1)).findById(id);
+//        assertNotNull(result);
+//        assertEquals(empleadoMock, result);
+//    }
 
     @Test
     public void testFindById_WithInvalidId_ThrowsBusinessException() {

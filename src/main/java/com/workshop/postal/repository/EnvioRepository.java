@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface EnvioRepository extends JpaRepository<Envio,String> {
     Envio findByNumeroGuia(String numeroGuia);
-    Boolean existsByNumeroGuia(String numeroGuia);
     List<Envio> findByEstadoEnvio(EstadoEnvio estadoEnvio);
 }

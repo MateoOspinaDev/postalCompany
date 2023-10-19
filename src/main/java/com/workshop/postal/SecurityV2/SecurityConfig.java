@@ -15,6 +15,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends AbstractHttpConfigurer<SecurityConfig, HttpSecurity>{
 
     private final ApiKeyAuthFilter apiKeyAuthFilter;
+    private final String[] endpointsWithoutAuthentication = {"/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/swagger-ui/index.html",
+            "/api/clientes",
+            "/v2/api-docs", "/configuration/ui",
+            "/swagger-resources/**", "/configuration/security",
+            "/swagger-ui.html", "/webjars/**", "/swagger-ui/**"
+    } ;
 
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception {
@@ -22,9 +31,8 @@ public class SecurityConfig extends AbstractHttpConfigurer<SecurityConfig, HttpS
         httpSecurity
                 .addFilterBefore(apiKeyAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        //.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/api/clientes").permitAll()
+                        .antMatchers(endpointsWithoutAuthentication).permitAll()
                         .anyRequest()
-                        //.permitAll()
                         .authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable);

@@ -1,10 +1,9 @@
 package com.workshop.postal.models;
 
 import com.workshop.postal.models.enums.TipoPaquete;
-import javax.persistence.*;
-
 import lombok.*;
-import org.springframework.data.annotation.Id;
+
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -12,7 +11,6 @@ import org.springframework.data.annotation.Id;
 @Entity
 public class Paquete {
 
-    @javax.persistence.Id
     @Id
     @Setter(AccessLevel.PRIVATE)
     @GeneratedValue(strategy = GenerationType.AUTO)
