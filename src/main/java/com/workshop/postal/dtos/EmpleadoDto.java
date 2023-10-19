@@ -1,10 +1,11 @@
 package com.workshop.postal.dtos;
 
 import com.workshop.postal.models.enums.TipoEmpleado;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Getter
 @Setter

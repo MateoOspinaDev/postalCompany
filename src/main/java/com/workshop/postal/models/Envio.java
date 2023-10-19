@@ -1,9 +1,9 @@
 package com.workshop.postal.models;
 
 import com.workshop.postal.models.enums.EstadoEnvio;
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
