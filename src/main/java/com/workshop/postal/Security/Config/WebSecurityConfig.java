@@ -27,18 +27,25 @@ public class WebSecurityConfig {
 
     private final IUserDetailsService userDetailsService;
     private final AuthenticationFilter authenticationFilter;
+    private final String[] endpointsWithoutAuthentication = {"/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/swagger-ui/index.html",
+            "/api/clientes",
+            "/v2/api-docs", "/configuration/ui",
+            "/swagger-resources/**", "/configuration/security",
+            "/swagger-ui.html", "/webjars/**", "/swagger-ui/**",
+            "/api/auth/**",
+    } ;
 
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                       // .requestMatchers("/api/auth/**").permitAll()
-                        //.anyRequest().hasRole(Role.USER.name())
-                                .anyRequest().permitAll()
-     //                  .requestMatchers(HttpMethod.GET).hasAuthority("READ")
-   //                    .requestMatchers(HttpMethod.PUT).hasAuthority("WRITE")
- //                      .requestMatchers(HttpMethod.DELETE).hasAuthority("WRITE")
+                                .requestMatchers(endpointsWithoutAuthentication)
+                        .permitAll()
+                                .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
