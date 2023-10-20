@@ -9,6 +9,7 @@ import com.workshop.postal.service.Interfaces.IClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,7 @@ public class ClienteController {
             @ApiResponse(responseCode = "500", description = "Error interno del servidor.")
     })
     @GetMapping
+    @SecurityRequirement(name = "bearer")
     public List<ClienteDto> getAllClientes() {
         List<Cliente> clientes = clienteService.findAll();
 
@@ -54,6 +56,7 @@ public class ClienteController {
            @ApiResponse(responseCode = "500", description = "Error interno del servidor.")
    })
     @GetMapping("/{id}")
+   @SecurityRequirement(name = "bearer")
     public ResponseEntity<ClienteDto> getClienteById(@PathVariable Long id) {
         return ResponseEntity.ok(ClienteMapperHelper.convertToDto(clienteService.findById(id)));
     }
@@ -70,6 +73,7 @@ public class ClienteController {
             @ApiResponse(responseCode = "500", description = "Error de conexion")
     })
     @PostMapping
+    @SecurityRequirement(name = "bearer")
     public ResponseEntity<ClienteDto> createCliente(@RequestBody Cliente cliente) {
         return ResponseEntity.ok(ClienteMapperHelper.convertToDto(clienteService.save(cliente)));
     }
@@ -84,6 +88,7 @@ public class ClienteController {
            @ApiResponse(responseCode = "500", description = "Error interno del servidor.")
    })
     @PutMapping("/{id}")
+   @SecurityRequirement(name = "bearer")
     public ResponseEntity<ClienteDto> updateCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
         return ResponseEntity.ok(ClienteMapperHelper.convertToDto(clienteService.save(cliente)));
     }
@@ -98,6 +103,7 @@ public class ClienteController {
            @ApiResponse(responseCode = "500", description = "Error interno del servidor.")
    })
     @DeleteMapping("/{id}")
+   @SecurityRequirement(name = "bearer")
     public ResponseEntity<Boolean> deleteCliente(@PathVariable Long id) {
         clienteService.deleteById(id);
         return ResponseEntity.ok(true);
