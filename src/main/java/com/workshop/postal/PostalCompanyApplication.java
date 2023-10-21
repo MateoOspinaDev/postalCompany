@@ -12,8 +12,6 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 
-
-
 @OpenAPIDefinition(
 		info = @Info(
 				title = "Servicio De Gestion De Mensajeria",
