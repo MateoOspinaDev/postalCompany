@@ -11,6 +11,7 @@ import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
 		info = @Info(
@@ -32,10 +33,6 @@ public class PostalCompanyApplication {
 		SpringApplication.run(PostalCompanyApplication.class, args);
 	}
 
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
 	@Bean
 	public OpenAPI openAPI() {
 		return new OpenAPI()

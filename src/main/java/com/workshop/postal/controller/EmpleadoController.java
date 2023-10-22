@@ -1,12 +1,12 @@
 package com.workshop.postal.controller;
 
 import com.workshop.postal.dtos.EmpleadoDto;
+import com.workshop.postal.mapper.EmpleadoMapper;
 import com.workshop.postal.models.Empleado;
 import com.workshop.postal.service.Interfaces.IEmpleadoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +18,10 @@ import java.util.List;
 public class EmpleadoController {
 
     private final IEmpleadoService empleadoService;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public EmpleadoController(IEmpleadoService empleadoService, ModelMapper modelMapper) {
+    public EmpleadoController(IEmpleadoService empleadoService) {
         this.empleadoService = empleadoService;
-        this.modelMapper = modelMapper;
     }
 
     @Operation(
@@ -48,7 +46,7 @@ public class EmpleadoController {
     @GetMapping("/{id}")
     public ResponseEntity<EmpleadoDto> getEmpleadoById(@PathVariable Long id) {
         Empleado empleado = empleadoService.findById(id);
-        return ResponseEntity.ok(modelMapper.map(empleado, EmpleadoDto.class));
+        return ResponseEntity.ok(EmpleadoMapper.MAPPER.empleadoToEmpleadoDto(empleado));
     }
     @Operation(
             summary = "CREAR O AÑADIR UN EMPLEADO",
@@ -63,7 +61,7 @@ public class EmpleadoController {
 
     @PostMapping
     public EmpleadoDto createEmpleado(@RequestBody Empleado empleado) {
-        return modelMapper.map(empleadoService.save(empleado), EmpleadoDto.class);
+        return EmpleadoMapper.MAPPER.empleadoToEmpleadoDto(empleadoService.save(empleado));
     }
     @Operation(
             summary = "ACTUALIZAR EMPLEADO POR ID",
@@ -76,7 +74,7 @@ public class EmpleadoController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<EmpleadoDto> updateEmpleado(@PathVariable Long id, @RequestBody Empleado empleado) {
-        return ResponseEntity.ok(modelMapper.map(empleadoService.save(empleado), EmpleadoDto.class));
+        return ResponseEntity.ok(EmpleadoMapper.MAPPER.empleadoToEmpleadoDto(empleadoService.save(empleado)));
     }
     @Operation(
             summary = "BORRAR EMPLEADO POR ID",

@@ -46,6 +46,9 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 	testImplementation 'org.mockito:mockito-junit-jupiter:4.4.0'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
