@@ -13,6 +13,7 @@ java {
 
 jar {
 	manifest {
+		enabled = false
 		attributes 'Main-Class': 'com.workshop.postal.PostalCompanyApplication'
 	}
 }
