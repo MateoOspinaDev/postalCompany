@@ -35,6 +35,20 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         final String jwt;
         final String userEmail;
 
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "authorization, content-type");
+
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
+        response.setHeader("Access-Control-Max-Age", "3600");
+
+        if (request.getMethod().equals("OPTIONS")) {
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            filterChain.doFilter(request, response);
+        }
         if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
             filterChain.doFilter(request, response);
             return;
