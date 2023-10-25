@@ -10,6 +10,8 @@ El proyecto es una REST API que tiene como objetivo automatizar los procesos de 
 - Creacion de envios con toda su informacion y acceso a los datos de los actores del envio como son paquete, empleado y cliente.
 - Filtracion de Envios por estado.
 
+#### Link de la api en producción: ![postal-company](https://postal-company.up.railway.app/swagger-ui/index.html) 
+
 ## Tecnologías Utilizadas:
 
 
@@ -47,7 +49,7 @@ El proyecto es una REST API que tiene como objetivo automatizar los procesos de 
 4. Ejecute el archivo build.gradle para descargar las dependencias del proyecto, cargar las configuraciones y que empiece a compilarlo.
 5. Ejecute el archivo PostalCompanyApplication para correr el programa.
 6. Acceda a testear y usar la aplicacion desde Postman usando los endpoints que se pueden ver en los controllers
-7. Use la aplicacion desde swagger,(poner link swagger)
+7. Use la aplicacion desde swagger
 
 # Diagramas
 #### Diagrama de clases
@@ -63,7 +65,7 @@ Si tienes preguntas, comentarios o sugerencias sobre este proyecto, no dudes en 
 **Mateo Ospina**
 - Correo Electrónico: mateoospinadesarrollo@gmail.com
 
-- LinkedIn: [Tu Nombre en LinkedIn](https://www.linkedin.com/in/tunombre/)
+- LinkedIn: [Mateo Ospina](https://www.linkedin.com/in/ospinadeveloper/)
 
 **Santiago Martinez**
 - Correo Electrónico: smyardev2@gmail.com
