@@ -65,8 +65,6 @@ Si tienes preguntas, comentarios o sugerencias sobre este proyecto, no dudes en 
 **Mateo Ospina**
 - Correo Electrónico: mateoospinadesarrollo@gmail.com
 
-- LinkedIn: [Mateo Ospina](https://www.linkedin.com/in/ospinadeveloper/)
-
 **Santiago Martinez**
 - Correo Electrónico: smyardev2@gmail.com
 - LinkedIn: [Santiago Martinez](http://linkedin.com/in/santiago-martinez-238a6525a)
